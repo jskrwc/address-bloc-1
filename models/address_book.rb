@@ -4,7 +4,6 @@ require 'bloc_record/base'
 
 # class AddressBook
 class AddressBook < BlocRecord::Base
-  attr_reader :entries
 
   # def initialize
   def initialize(options={})
@@ -15,6 +14,15 @@ class AddressBook < BlocRecord::Base
   def add_entry(name, phone_number, email)
     Entry.create(name: name, phone_number: phone_number, email: email, address_book_id: self.id)
   end
+
+  def entries      # returns array of all address book entries
+    Entry.where(address_book_id: self.id)
+  end
+
+  def find_entry(name)   # returns first entry where name matches specific name
+    Entry.where(name: name, address_book_id: self.id).first
+  end
+
 
   def import_from_csv(file_name)
     # Implementation goes here
