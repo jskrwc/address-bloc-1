@@ -1,6 +1,8 @@
 require 'bloc_record/base'
 
 class Entry < BlocRecord::Base
+  belongs_to :address_book
+
 # class Entry
 #   # These must be accessors since we mutate them
 #   attr_accessor :name, :phone_number, :email
